@@ -75,5 +75,6 @@ class Round
     puts "Geography - #{percent_correct_by_category(:Geography)}%"
     puts "Sports - #{percent_correct_by_category(:Sports)}%"
 
+    uniquecategories = @deck.cards.select {| category | @card.catoegory }
   end
 end
