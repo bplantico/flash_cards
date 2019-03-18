@@ -21,7 +21,7 @@ class Round
     turn
   end
 
-  def number_correct
+  def number_correct # refactored instead of .each method below
     correct_turn_counter = @turns.select do |turn|
       turn.correct? == true
     end
@@ -69,10 +69,11 @@ class Round
     end
 
     puts "****** Game over! ******"
-    puts "You had #{@number_correct} correct guesses out of #{deck.count} for a total of #{percent_correct}%"
+    puts "You had #{number_correct} correct guesses out of #{deck.count} for a total of #{percent_correct}%"
 
-    # STEM - 100% correct
-    # Turing Staff - 50% correct
-    # Pop Culture - 100% correct
+    puts "STEM - #{percent_correct_by_category(:STEM)}%"
+    puts "Geography - #{percent_correct_by_category(:Geography)}%"
+    puts "Sports - #{percent_correct_by_category(:Sports)}%"
+
   end
 end
