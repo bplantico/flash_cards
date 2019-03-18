@@ -21,22 +21,12 @@ class Round
     turn
   end
 
-  def number_correct # refactored instead of .each method below
+  def number_correct # refactored instead of .each method
     correct_turn_counter = @turns.select do |turn|
       turn.correct? == true
     end
     correct_turn_counter.count
   end
-
-  # def number_correct
-  #   correct_turns = []
-  #   @turns.each do |turn|
-  #     if turn.correct? == true
-  #       correct_turns << turn
-  #     end
-  #   end
-  #   correct_turns.count
-  # end
 
   def number_correct_by_category(category)
     correct_turns = @turns.select do |turn|
@@ -69,12 +59,15 @@ class Round
     end
 
     puts "****** Game over! ******"
-    puts "You had #{number_correct} correct guesses out of #{deck.count} for a total of #{percent_correct}%"
-
-    puts "STEM - #{percent_correct_by_category(:STEM)}%"
-    puts "Geography - #{percent_correct_by_category(:Geography)}%"
-    puts "Sports - #{percent_correct_by_category(:Sports)}%"
-
-    uniquecategories = @deck.cards.select {| category | @card.catoegory }
+    # create an array that is only the categories
+      categories = deck.cards.map do |card|
+        card.category
+      end
+    # return only unique objects from array
+      unique_categories = categories.uniq
+    # put the percent_correct_by_category
+    unique_categories.each do |cat|
+      puts "#{cat} - #{percent_correct_by_category(cat)}%"
+    end
   end
 end
