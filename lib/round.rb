@@ -3,7 +3,7 @@ class Round
   attr_reader :deck,
               :turns,
               :card_index,
-              :current_card
+              :current_car
 
   def initialize(deck)
     @deck = deck
@@ -55,5 +55,19 @@ class Round
     end
     (number_correct_by_category(category) / (all_turns_in_category.count).to_f * 100)
   end
-  
+
+  def start
+    puts "Welcome! You're playing with #{deck.count} cards."
+    puts "-------------------------------------------------"
+    while @current_card != nil
+      deck.count.times do
+        puts "This is card number #{@card_index + 1} of #{deck.count}"
+        puts "#{@current_card.question}"
+        take_turn(gets.chomp)
+        puts "#{@turns.last.feedback}"
+      end
+    end
+
+    puts "GAME OVER" #and show stats report
+  end
 end
