@@ -22,19 +22,38 @@ class Round
   end
 
   def number_correct
-    card_counter = 0
-    @turns.each do |turn|
-      if turn.correct?
-        card_counter += 1
-      end
+    correct_turn_counter = @turns.select do |turn|
+      turn.correct? == true
     end
-    card_counter
+    correct_turn_counter.count
   end
-end
 
-# A Round will be the object that processes responses and records guesses.
-# When we make a guess, the guess is recorded, and the next card in the deck becomes the current card.
-# The take_turn method takes a string representing the guess.
-# It should create a new Turn object with the appropriate guess and Card.
-# It should store this new Turn, as well as return it from the take_turn method.
-# Also, when the take_turn method is called, the Round should move on to the next card in the deck.
+  # def number_correct
+  #   correct_turns = []
+  #   @turns.each do |turn|
+  #     if turn.correct? == true
+  #       correct_turns << turn
+  #     end
+  #   end
+  #   correct_turns.count
+  # end
+
+  def number_correct_by_category(category)
+    correct_turns = @turns.select do |turn|
+      turn.correct? == true && category == turn.card.category
+    end
+    correct_turns.count
+  end
+
+  def percent_correct
+    (number_correct.to_f / turns.count) * 100
+  end
+
+  def percent_correct_by_category(category)
+    all_turns_in_category = @turns.select do |turn|
+      category == turn.card.category
+    end
+    (number_correct_by_category(category) / (all_turns_in_category.count).to_f * 100)
+  end
+  
+end

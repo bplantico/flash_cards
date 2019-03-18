@@ -11,7 +11,7 @@ class Deck
 
   def cards_in_category(category)
     @cards.select do |card|
-        card.category == category
+      card.category == category
     end
   end
 
