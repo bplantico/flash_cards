@@ -68,6 +68,11 @@ class Round
       end
     end
 
-    puts "GAME OVER" #and show stats report
+    puts "****** Game over! ******"
+    puts "You had #{@number_correct} correct guesses out of #{deck.count} for a total of #{percent_correct}%"
+
+    # STEM - 100% correct
+    # Turing Staff - 50% correct
+    # Pop Culture - 100% correct
   end
 end
