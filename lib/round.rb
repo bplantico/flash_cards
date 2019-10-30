@@ -17,13 +17,13 @@ class Round
     @turns << turn
     @card_index += 1
     @current_card  = deck.cards[@card_index]
-
+    
     turn
   end
 
   def number_correct # refactored instead of .each method
     correct_turn_counter = @turns.select do |turn|
-      turn.correct? == true
+      turn.correct?
     end
     correct_turn_counter.count
   end
